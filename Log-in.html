@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | Pacs Clothing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000000, #000000);
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-box {
+      background: rgba(0, 0, 0, 0.7);
+      padding: 40px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .login-box h2 {
+      margin-bottom: 25px;
+      font-size: 28px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #ff4081;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background: #ff4081;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .login-box .password-toggle {
+      position: absolute;
+      top: 57%;
+      right: 20px;
+      cursor: pointer;
+      color: #ff4081;
+      font-size: 18px;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #ddd;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #ff4081;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Login to Pacs Clothing</h2>
+    <form id="loginForm">
+      <input type="text" id="Pacapac" placeholder="Username" required autocomplete="off"/>
+      <input type="password" id="Pacs" placeholder="Password" required autocomplete="off" />
+      <span class="password-toggle" onclick="togglePassword()">👁️</span>
+      <button type="submit">Login</button>
+    </form>
+    <div class="footer">
+      &copy; 2025 Pacs Clothing | <a href="#">Forgot Password?</a>
+    </div>
+  </div>
+
+  <script>
+    const USERS = [
+      { username: "admin", password: "1234" },
+      { username: "user", password: "abcd" }
+    ];
+
+    function togglePassword() {
+      const input = document.getElementById('Pacs');
+      const toggle = document.querySelector('.password-toggle');
+      if (input.type === "password") {
+        input.type = "text";
+        toggle.textContent = "🙈";
+      } else {
+        input.type = "password";
+        toggle.textContent = "👁️";
+      }
+    }
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('Pacapac').value;
+      const password = document.getElementById('Pacs').value;
+
+      const isValid = USERS.find(user => user.username === username && user.password === password);
+
+      if (isValid) {
+        sessionStorage.setItem('loggedInUser', username);
+        window.location.href = 'Home.html';
+      } else {
+        alert("Invalid username or password.");
+      }
+    });
+  </script>
+
+</body>
+</html>
